@@ -3,12 +3,6 @@
 #include <clocale>
 using namespace std;
 
-void print_menu() {
-	system("cls");
-	int menu_item;
-	cout << "1. Задание 1\n2. Задание 2\n3. Задание 3\n4. Задание 4\n5. Задание 5\n0. Выход\n";
-}
-
 void task1() {
 	cout << "задание 1 asdasdasd \n";
 	//первое задание
@@ -18,8 +12,24 @@ void task2() {
 	cout << "задание 2 asdasdasdad\n";
 }
 
+
+
+
+
+
+
+
+
+
+
+void print_menu() {
+	system("cls");
+	int menu_item;
+	cout << "1. Задание 1\n2. Задание 2\n3. Задание 3\n4. Задание 4\n5. Задание 5\n0. Выход\n";
+}
+
 int main() {
-	setlocale(LC_CTYPE, "rus"); //поддержка кириллицы в консоли
+	setlocale(LC_CTYPE, "rus"); //добавляем поддержку кириллицы
 	int menu_choice;
 	bool M = true;
 
