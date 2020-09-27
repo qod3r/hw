@@ -15,15 +15,32 @@ void task1() {
 	mm = (k - (hh * 3600))/60;
 
 	cout << hh << "." << mm << endl;
+}
 
 
+//----------------начало второго задания----------------
+double task2_f(double x) {
+	if (x > 0) { return x; }
+	if ((x >= (-1)) && (x <= 0)) { return 0; }
+	if (x < (-1)) { return x * x; }
+}
+
+double task2_z(double x) {
+	return (7 * x * x * x + 5 * x * x + x);
 }
 
 void task2() {
-	//cout << "задание 2 asdasdasdad\n";
+	cout << "Вычислить y = F(x)+0.75z, где z=7x^3+5x^2+x, -2<=x<=4,\nF(x)={x, если x>0; 0, если -1<=x<=0; x^2, если x<-1\n";
+	double x, z=0;
+	cout << "Введите x: ";
+	cin >> x;
+	if ((x >= (-2)) && (x <= 4)) {
+		z = task2_z(x);
+		cout << "y=" << task2_f(x) + 0.75 * z << endl;
+	}
+	else { cout << "x не подходит под условия задачи\n"; }
 }
-
-
+//----------------конец второго задания----------------
 
 
 
@@ -34,7 +51,7 @@ void task2() {
 void print_menu() {
 	system("cls");
 	int menu_item;
-	cout << "1. Задание 1\n2. Задание 2\n3. Задание 3\n4. Задание 4\n5. Задание 5\n0. Выход\n\n";
+	cout << "Введите номер задания (1-11)\n0. Выйти\n";
 }
 
 int main() {
