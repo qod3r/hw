@@ -99,7 +99,27 @@ void task5() {
 }
 
 void task6() {
+	cout << "Даны действительные числа x,y.\nМеньшее из этих двух чисел заменить их полусуммой, а большее - их удвоенным произведением.\nЕсли "
+		"числа x и y окажутся равными, то выводить сообщение об ошибке.\n";
 
+	double x, y, hsum, dprod;
+	cout << "Введите x y:\n";
+	cin >> x >> y;
+	hsum = (x + y) / 2;
+	dprod = x * y * 2;	
+
+	if (x > y) {
+		y = hsum;
+		x = dprod;
+		cout << "x = " << x << "\ny = " << y;
+	}
+	else if (y > x) {
+		x = hsum;
+		y = dprod;
+		cout << "x = " << x << "\ny = " << y << endl;
+	}
+	else { cout << "Ошибка.\n"; }
+	
 }
 
 void print_menu() {
