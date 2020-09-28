@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 #include <clocale>
-#include <string>
 using namespace std;
 
 void task1() {
@@ -87,8 +87,20 @@ void task4() {
 	else { cout << "Треугольник не существует\n"; }
 }
 
+void task5() {
+	cout << "Вычислить значение выражения\n"; //TODO дописать выражение
+	double T, x, y, z, a, b;
+	cout << "Введите a b\n";
+	cin >> a >> b;
 
+	x = a * a - 1; y = b * b - a * a; z = sqrt(abs(a + b));
+	T = ((abs(x)+min(x,min(y,z)))/(abs(y)+max(x,y)));
+	cout << "T = " << T << endl;
+}
 
+void task6() {
+
+}
 
 void print_menu() {
 	system("cls");
@@ -119,6 +131,12 @@ int main() {
 			break;
 		case 4:
 			task4();
+			break;
+		case 5:
+			task5();
+			break;
+		case 6:
+			task6();
 			break;
 		default:
 			cout << "Что-то пошло не так\n";
