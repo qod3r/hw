@@ -3,7 +3,7 @@
 #include <clocale>
 using namespace std;
 
-void main() {
+int main() {
 	setlocale(LC_CTYPE, "rus");
 
 	unsigned long int n, N;
