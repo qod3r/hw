@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <clocale>
 using namespace std;
 
 void main() {
