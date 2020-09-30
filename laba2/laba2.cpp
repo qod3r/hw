@@ -122,6 +122,16 @@ void task6() {
 	
 }
 
+void task7() {
+	cout << "Треугольник задан координатами своих вершин. Проверить, будет ли какая-либо медиана\nэтого треугольника параллельна заданной прямой ax+by+c=0\n";
+	double ax, ay, bx, by, cx, cy, a, b, c;
+	cout << "Введите координаты вершин (x1 y1 x2 y2 x3 y3) и a b c\n";
+	cin >> ax >> ay >> bx >> by >> cx >> cy >> a >> b >> c;
+
+
+
+}
+
 void print_menu() {
 	system("cls");
 	int menu_item;
@@ -157,6 +167,9 @@ int main() {
 			break;
 		case 6:
 			task6();
+			break;
+		case 7:
+			task7();
 			break;
 		default:
 			cout << "Что-то пошло не так\n";
