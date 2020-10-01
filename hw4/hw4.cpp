@@ -2,16 +2,22 @@
 #include <cmath>
 #include <clocale>
 using namespace std;
-
+//2.23
 void task1() {
-	cout << "задание 1\n";
-	//первое задание
+	cout << "Задание 1\n";
 }
-
+//2.27
 void task2() {
-	cout << "задание 2\n";
+	cout << "Задание 2\n";
 }
 
+void task3() {
+    cout << "Задание 3\n";
+}
+
+void task4() {
+    cout << "Задание 4\n";
+}
 
 void print_menu() {
 	system("cls");
@@ -36,6 +42,12 @@ int main() {
 			break;
 		case 2:
 			task2();
+			break;
+		case 3:
+			task3();
+			break;
+		case 4:
+			task4();
 			break;
 		default:
 			cout << "Что-то пошло не так\n";
