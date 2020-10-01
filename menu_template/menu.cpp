@@ -25,7 +25,7 @@ void task2() {
 void print_menu() {
 	system("cls");
 	int menu_item;
-	cout << "1. Задание 1\n2. Задание 2\n3. Задание 3\n4. Задание 4\n5. Задание 5\n0. Выход\n";
+	cout << "Введите номер задания (1-      )\n0. Выйти\n";
 }
 
 int main() {
