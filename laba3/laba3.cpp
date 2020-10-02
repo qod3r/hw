@@ -5,18 +5,17 @@ using namespace std;
 
 void task1() {
 	cout << "задание 1\n";
-	//первое задание
+	
 }
 
 void task2() {
-	cout << "задание 2\n";
+    cout << "задание 2\n";
 }
-
 
 void print_menu() {
 	system("cls");
 	int menu_item;
-	cout << "Введите номер задания\n1) \n2) \n3) \n4) \n0) Выйти\n";
+	cout << "Введите номер задания (1 - 11)\n0) Выйти\n";
 }
 
 int main() {
