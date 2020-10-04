@@ -17,6 +17,7 @@ void task1() {
     if (k > 0) {cout << "Цифра 3 входит в число " << k << " раз(а)\n";}
     else {cout << "Цифра 3 не входит в число\n";}
 }
+
 // ----------Второе задание----------
 void task2_calcy(double x) {
     double y; const double PI = 3.141592653589793238463;
@@ -49,7 +50,27 @@ void task2() {
 // ----------Конец второго задания----------
 
 void task3() {
+    cout << "Вычислить значение выражения a^2 + 2a - 3 / 2 (a-1) при а = 0, 3, 6, ..., 21\n";
+    int a = 0; double val = 0;
+    while (a <= 21) {
+        val = (a * a + 2 * a - 3)/(2 * (a - 1));
+        cout << "a = " << a << endl;
+        a += 3;
+    }
+}
 
+void task4() {
+    cout << "Вычислить первые 12 членов последовательности\n";
+    //первые 12 членов посл-ти, v(i)=(i + 1)/(i^2 + 1)*v(i-1) - v(i-1)*v(i-2); i = 4, 5...
+    double v1 = 0, v2 = 1.5;
+    double vn = 1;
+    cout << "v0 = v1 = 0\nv2 = " << v2 << endl; 
+    for (double i = 4.0; i <= 12; i++) {
+        vn = ((i + 1)/(i * i + 1)) * v2 - v2 * v1;
+        cout << "v" << i << " = " << vn << endl;
+        v1 = v2;
+        v2 = vn;
+    }
 }
 
 void print_menu() {
@@ -78,6 +99,9 @@ int main() {
 			break;
 		case 3:
 			task3();
+			break;
+		case 4:
+			task4();
 			break;
 		default:
 			cout << "Что-то пошло не так\n";
