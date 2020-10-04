@@ -17,9 +17,39 @@ void task1() {
     if (k > 0) {cout << "Цифра 3 входит в число " << k << " раз(а)\n";}
     else {cout << "Цифра 3 не входит в число\n";}
 }
-
+// ----------Второе задание----------
+void task2_calcy(double x) {
+    double y; const double PI = 3.141592653589793238463;
+    y = (x * cos(PI / 4) - x * x)/(1 - 2 * x * cos(PI / 4) + x * x);
+    cout << "y = " << y << endl;
+}
+void task2_calcS(double x) {
+    const double PI = 3.141592653589793238463;
+    double a = 0.1, b = 0.8, h = 0.05, epsilon = 0.0001;
+    double S = 0, t = 1;
+    
+    for (int i = 1; ((abs(t) >= epsilon) && (x <= b)); i++) {
+        t = x * cos((i * PI) / 4);                              //S всегда суммируется только один раз, т.к при i = 2
+        S += t;                                                 //косинус уходит в 0, следовательно весь член суммы(t) уходит в 0
+        cout << "S(" << i << ") = " << S << endl;               //и по условию задачи цикл прекращается
+        task2_calcy(x);
+        if (x + h <= b) {x += h;}
+    } 
+}
 void task2() {
-    cout << "задание 2\n";
+    double a = 0.1, b = 0.8, x;
+    cout << "Вычислить значения S, y\n"
+            "Введите x (в диапазоне от " << a << " до " << b << "): ";
+    cin >> x;
+    if ((x >= a) && (x <= b)) {
+        task2_calcS(x);
+    }    
+    else {cout << "x не принадлежит заданному диапазону.\n";}
+}
+// ----------Конец второго задания----------
+
+void task3() {
+
 }
 
 void print_menu() {
@@ -45,6 +75,9 @@ int main() {
 			break;
 		case 2:
 			task2();
+			break;
+		case 3:
+			task3();
 			break;
 		default:
 			cout << "Что-то пошло не так\n";
