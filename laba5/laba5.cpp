@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <stdio.h>
 using namespace std;
 
 void Menu();
@@ -8,9 +7,9 @@ void task1();
 void task2();
 void task3();
 void task4();
-//void task5();
-//void task6();
-//void task7();
+void task5();
+void task6();
+void task7();
 //void task8();
 
 int main() {
@@ -47,15 +46,15 @@ void Menu() {
       case 4:
         task4();
         break;
-      //case 5:
-      //  task5();
-      //  break;
-      //case 6:
-      //  task6();
-      //  break;
-      //case 7:
-      //  task7();
-      //  break;
+      case 5:
+        task5();
+        break;
+      case 6:
+        task6();
+        break;
+      case 7:
+        task7();
+        break;
       //case 8:
       //  task8();
       //  break;
@@ -67,7 +66,7 @@ void Menu() {
         break;
     }
     if (menu_choice != 0) {
-      cout << endl << "Введите любой символ чтобы продолжить: ";
+      cout << endl << "Нажмите Enter чтобы продолжить...";
       cin.get();    //пауза консоли
       cin.get();    //два раза, т.к cin отделяет только значение ввода
     }               //а enter переходит в первый cin.get
@@ -83,8 +82,7 @@ bool prime(int x) {
 }
 
 void task1() {
-  cout << "Задача 1.\n"
-          "Написать функцию, определяющую, является ли заданное число простым.\n"
+  cout << "Написать функцию, определяющую, является ли заданное число простым.\n"
           "Введите a b: ";
   int a, b;
   cin >> a >> b;
@@ -120,8 +118,7 @@ int nok(int a, int b) {
 }
 
 void task2() {
-  cout << "Задача 2.\n"
-          "Составить программу нахождения наименьшего общего кратного для трех натуральных чисел.\n"
+  cout << "Составить программу нахождения наименьшего общего кратного для трех натуральных чисел.\n"
           "Введите a b c: ";
   int a, b, c;
   cin >> a >> b >> c;
@@ -133,7 +130,7 @@ void task2() {
 double hexagon(double a) {
   double S, St;
   St = (a * a * sqrt(3)) / 4; //площадь равностороннего треугольника
-  S = 6 * St;               //площадь шестиугольника
+  S = 6 * St;                 //площадь шестиугольника
   return S;
 }
 
@@ -171,14 +168,16 @@ void frac_mult(int a, int b, int c, int d) {
 void frac_sum(int a, int b, int c, int d) {
   int N, M, t;
   frac_print(a, b); cout << " + "; frac_print(c, d); cout << " = ";
-  //приводим к общему знаменателю
   if (b != d) {
-    t = b * d;
+    t = b * d;    //приводим к общему знаменателю
     a *= d;
     c *= b;
+    N = a + c;
+    M = t;
+  } else {
+    N = a + c;
+    M = b;
   }
-  N = a + c;
-  M = t;
   frac_print(N, M); cout << endl;
 }
 
@@ -199,6 +198,77 @@ void task4() {
 }
 
 //----------задача 5----------
+int fact(int x) {
+  int f = 1;
+  for (int i = 2; i <= x; i++) {
+    f *= i;
+  }
+  return f;
+}
+
 void task5() {
-  
+  cout << "Составить программу вычисления суммы факториалов четных чисел от m до n.\n"
+          "Введите m n: ";
+  int m, n;
+  cin >> m >> n;
+
+  if (m % 2 == 1) m += 1;
+  for (int i = m; i <= n; i += 2) {
+    cout << i << "! = " << fact(i) << endl;
+  }
+}
+
+//----------задача 6----------
+int digsum(int N) {
+  int sum = 0;
+  while (N > 0) {
+    sum += N % 10;
+    N /= 10;
+  }
+  return sum;
+}
+
+int minsum(int *arr, int n) {
+  int s = 0, min = arr[0], t = 0;
+  for (int i = 0; i < n; i++) {
+    s = digsum(arr[i]);
+    if (t > s) {
+      min = arr[i];
+      t = s;
+    }
+  }
+  return min;
+}
+
+int maxsum(int *arr, int n) {
+  int s = 0, max = 0, t = 0;
+  for (int i = 0; i < n; i++) {
+    s = digsum(arr[i]);
+    if (s > t) {
+      max = arr[i];
+      t = s;
+    }
+  }
+  return max;
+}
+
+void task6() {
+  cout << "Последовательно задается n чисел. Найти числа с наименьшей и наибольшей суммой цифр\n"
+          "Введите количество чисел: ";
+  int n;
+  cin >> n;
+  int arr[n];
+
+  cout << "Введите числа через пробел: ";
+  for (int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  cout << "Число с наименьшей суммой цифр: " << minsum(arr, n) << endl;
+  cout << "Число с наибольшей суммой цифр: " << maxsum(arr, n) << endl;
+}
+
+//----------задача 7----------
+void task7() {
+
 }
