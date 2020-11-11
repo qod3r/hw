@@ -1,5 +1,6 @@
 #include <iostream>
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 using namespace std;
 
 void Menu();
@@ -10,7 +11,7 @@ void task4();
 void task5();
 void task6();
 void task7();
-//void task8();
+void task8();
 
 int main() {
   Menu();
@@ -55,9 +56,9 @@ void Menu() {
       case 7:
         task7();
         break;
-      //case 8:
-      //  task8();
-      //  break;
+      case 8:
+        task8();
+        break;
       case 0:
         cout << "До связи" << endl;
         break;
@@ -257,7 +258,7 @@ void task6() {
           "Введите количество чисел: ";
   int n;
   cin >> n;
-  int arr[n];
+  int *arr = new int[n];
 
   cout << "Введите числа через пробел: ";
   for (int i = 0; i < n; i++) {
@@ -266,9 +267,87 @@ void task6() {
 
   cout << "Число с наименьшей суммой цифр: " << minsum(arr, n) << endl;
   cout << "Число с наибольшей суммой цифр: " << maxsum(arr, n) << endl;
+
+  delete[] arr;
 }
 
 //----------задача 7----------
-void task7() {
+int digcount(int n) {
+  int t = 0;
+  while (n > 0) {
+    t++;
+    n /= 10;
+  }
+  return t;
+}
 
+void task7() {
+  cout << "Определить, в каком из данных двух чисел больше цифр\n"
+          "Введите числа: ";
+  int a, b;
+  cin >> a >> b;
+  
+  int ac = digcount(a), bc = digcount(b);
+  if (ac > bc) cout << "В первом числе больше цифр (" << ac << ")";
+  else if (ac < bc) cout << "Во втором числе больше цифр (" << bc << ")";
+  else cout << "В этих числах одинаковое количество цифр.";
+}
+
+//----------задача 8----------
+void circle() {
+  cout << "Введите радиус r: ";
+  double r;
+  cin >> r;
+  cout << "S = " << M_PI * r * r;
+}
+
+void rectangle() {
+  cout << "Введите стороны a b: ";
+  double a, b;
+  cin >> a >> b;
+  cout << "S = " << a * b;
+}
+
+void triangle() {
+  cout << "Введите стороны катетов a b: ";
+  double a, b;
+  cin >> a >> b;
+  cout << "S = " << a * b / 2;
+}
+
+
+void task8() {
+  int fig_choice;
+  do {
+    cout << endl << " ------------------------- " << endl;
+    cout << " 1 - Круг" << endl;
+    cout << " 2 - Прямоугольник" << endl;
+    cout << " 3 - Прямоугольный треугольник" << endl;
+    cout << " 0 - Выйти" << endl;
+    cout << " ------------------------- " << endl;
+
+    cin >> fig_choice;
+
+    switch(fig_choice) {
+      case 1:
+        circle();
+        break;
+      case 2:
+        rectangle();
+        break;
+      case 3:
+        triangle();
+        break;
+      case 0:
+        break;
+      default:
+        cout << "Что-то пошло не так, попробуйте снова" << endl;
+        break;
+    }
+    if (fig_choice != 0) {
+      cout << endl << "Нажмите Enter чтобы продолжить...";
+      cin.get();    //пауза консоли
+      cin.get();    //два раза, т.к cin отделяет только значение ввода
+    }               //а enter переходит в первый cin.get
+  } while(fig_choice);
 }
