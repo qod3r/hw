@@ -9,9 +9,9 @@ int main() {
 }
 
 void Menu() {
-  int key;
+  int menu_choice;
   do {
-    cout << " ------------- " << endl;
+    cout << endl << " ------------- " << endl;
     cout << " 1 - Задание 1" << endl;
     cout << " 2 - Задание 2" << endl;
     cout << " 3 - Задание 3" << endl;
@@ -19,21 +19,21 @@ void Menu() {
     cout << " 0 - Выйти" << endl;
     cout << " ------------- " << endl;
 
-    cin >> key;
+    cin >> menu_choice;
 
-    switch(key) {
-      case 1:
-        cout << "Задание 1" << endl;
-        break;
-      case 2:
-        cout << "Задание 2" << endl;
-        break;
-      case 3:
-        cout << "Задание 3" << endl;
-        break;
-      case 4:
-        cout << "Задание 4" << endl;
-        break;
+    switch(menu_choice) {
+      //case 1:
+      //  task1();
+      //  break;
+      //case 2:
+      //  task2();
+      //  break;
+      //case 3:
+      //  task3();
+      //  break;
+      //case 4:
+      //  task4();
+      //  break;
       case 0:
         cout << "До связи" << endl;
         break;
@@ -41,5 +41,5 @@ void Menu() {
         cout << "Что-то пошло не так, попробуйте снова" << endl;
         break;
     }
-  } while(key);
+  } while(menu_choice);
 }
