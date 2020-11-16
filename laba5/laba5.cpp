@@ -210,13 +210,14 @@ int fact(int x) {
 void task5() {
   cout << "Составить программу вычисления суммы факториалов четных чисел от m до n.\n"
           "Введите m n: ";
-  int m, n;
+  int m, n, s = 0;
   cin >> m >> n;
 
   if (m % 2 == 1) m += 1;
   for (int i = m; i <= n; i += 2) {
-    cout << i << "! = " << fact(i) << endl;
+    s += fact(i);
   }
+  cout << "S = " << s << endl;
 }
 
 //----------задача 6----------
