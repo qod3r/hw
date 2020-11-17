@@ -60,7 +60,7 @@ void Menu() {
         task8();
         break;
       case 0:
-        cout << "До связи" << endl;
+        cout << "Bye" << endl;
         break;
       default:
         cout << "Что-то пошло не так, попробуйте снова" << endl;
@@ -129,10 +129,9 @@ void task2() {
 
 //----------задача 3----------
 double hexagon(double a) {
-  double S, St;
-  St = (a * a * sqrt(3)) / 4; //площадь равностороннего треугольника
-  S = 6 * St;                 //площадь шестиугольника
-  return S;
+  double St;
+  St = (a * a * sqrt(3)) / 4; //площадь равностороннего треугольника               //площадь шестиугольника
+  return St;
 }
 
 void task3() {
@@ -141,7 +140,7 @@ void task3() {
   int input;
   cin >> input;
   double a = (double)input;
-  cout << "S = " << hexagon(a);
+  cout << "S = " << hexagon(a)*6;
 }
 
 //----------задача 4----------
@@ -199,8 +198,8 @@ void task4() {
 }
 
 //----------задача 5----------
-int fact(int x) {
-  int f = 1;
+unsigned long int fact(int x) {
+  unsigned long int f = 1;
   for (int i = 2; i <= x; i++) {
     f *= i;
   }
@@ -210,12 +209,13 @@ int fact(int x) {
 void task5() {
   cout << "Составить программу вычисления суммы факториалов четных чисел от m до n.\n"
           "Введите m n: ";
-  int m, n, s = 0;
+  int m, n; unsigned long int s = 0;
   cin >> m >> n;
 
   if (m % 2 == 1) m += 1;
   for (int i = m; i <= n; i += 2) {
     s += fact(i);
+    cout << i << "! = " << fact(i) << endl;
   }
   cout << "S = " << s << endl;
 }
@@ -231,7 +231,8 @@ int digsum(int N) {
 }
 
 int minsum(int *arr, int n) {
-  int s = 0, min = arr[0], t = 0;
+  int s = 0, min = arr[0];
+  int t = 0;
   for (int i = 0; i < n; i++) {
     s = digsum(arr[i]);
     if (t > s) {
