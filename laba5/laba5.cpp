@@ -130,7 +130,7 @@ void task2() {
 //----------задача 3----------
 double hexagon(double a) {
   double St;
-  St = (a * a * sqrt(3)) / 4; //площадь равностороннего треугольника               //площадь шестиугольника
+  St = (a * a * sqrt(3)) / 4; //площадь равностороннего треугольника
   return St;
 }
 
@@ -230,19 +230,6 @@ int digsum(int N) {
   return sum;
 }
 
-int minsum(int *arr, int n) {
-  int s = 0, min = arr[0];
-  int t = 0;
-  for (int i = 0; i < n; i++) {
-    s = digsum(arr[i]);
-    if (t > s) {
-      min = arr[i];
-      t = s;
-    }
-  }
-  return min;
-}
-
 int maxsum(int *arr, int n) {
   int s = 0, max = 0, t = 0;
   for (int i = 0; i < n; i++) {
@@ -253,6 +240,18 @@ int maxsum(int *arr, int n) {
     }
   }
   return max;
+}
+
+int minsum(int *arr, int n) {
+  int s = 0, min = arr[0], t = maxsum(arr, n);
+  for (int i = 0; i < n; i++) {
+    s = digsum(arr[i]);
+    if (t > s) {
+      min = arr[i];
+      t = s;
+    }
+  }
+  return min;
 }
 
 void task6() {
