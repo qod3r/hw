@@ -35,7 +35,7 @@ void Menu() {
       //  task4();
       //  break;
       case 0:
-        cout << "До связи" << endl;
+        cout << "Bye" << endl;
         break;
       default:
         cout << "Что-то пошло не так, попробуйте снова" << endl;
