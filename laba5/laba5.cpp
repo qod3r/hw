@@ -198,8 +198,8 @@ void task4() {
 }
 
 //----------задача 5----------
-unsigned long int fact(int x) {
-  unsigned long int f = 1;
+double fact(int x) {
+  double f = 1;
   for (int i = 2; i <= x; i++) {
     f *= i;
   }
@@ -209,7 +209,7 @@ unsigned long int fact(int x) {
 void task5() {
   cout << "Составить программу вычисления суммы факториалов четных чисел от m до n.\n"
           "Введите m n: ";
-  int m, n; unsigned long int s = 0;
+  int m, n; double s = 0;
   cin >> m >> n;
 
   if (m % 2 == 1) m += 1;
