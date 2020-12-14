@@ -8,7 +8,7 @@ void Menu();
 void Print(double [], int);
 int  GetLength();
 void FillArr(double [], int);
-void CreateArr(double []);
+int CreateArr(double []);
 void Task1();
 void Task2();
 void Task3();
@@ -91,15 +91,16 @@ void FillArr(double arr[], int n) {
   }
 }
 
-void CreateArr(double arr[]) {
+int CreateArr(double arr[]) {
   int n = GetLength();
   FillArr(arr, n);
   cout << "Начальный массив:" << endl;
   Print(arr, n);
+  return n;
 }
 
 double MaxElement(double arr[], int n) {
-  double tmax = 0;
+  double tmax = arr[0];
   for (int i = 0; i < n; i++) {
     if (arr[i] > tmax) {
       tmax = arr[i];
@@ -121,8 +122,7 @@ double MinElement(double arr[], int n) {
 void Task1() {
   cout << "Найти максимальный и минимальный элементы массива" << endl;
   double arr[MAX_N];
-  CreateArr(arr);
-  int n = sizeof(arr)/sizeof(arr[0]);
+  int n = CreateArr(arr);
   cout << "Максимальный элемент: " << MaxElement(arr, n) << endl;
   cout << "Минимальный элемент: " << MinElement(arr, n) << endl;
 }
@@ -130,10 +130,8 @@ void Task1() {
 void Task2() {
   cout << "Переставить местами максимальный и минимальный элементы" << endl;
   double arr[MAX_N];
-  CreateArr(arr);
-  int n = sizeof(arr)/sizeof(arr[0]);
+  int n = CreateArr(arr);  
   
-
 }
 
 void Task3() {}
