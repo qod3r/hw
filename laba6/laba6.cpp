@@ -7,8 +7,8 @@ using namespace std;
 void Menu();
 void Print(double [], int);
 int  GetLength();
-void FillArr(double [], int);
-int CreateArr(double []);
+void FillArr(double [], int, bool);
+int  CreateArr(double [], bool);
 void Task1();
 void Task2();
 void Task3();
@@ -84,56 +84,93 @@ int GetLength() {
   return n;
 }
 
-void FillArr(double arr[], int n) {
+void FillArr(double arr[], int n, bool isReal) {
   srand(time(0));
-  for (int i = 0; i < n; i++) {
-    arr[i] = (rand() % 201) - 100; //генерация в промежутке [-100, 100]
+  if (isReal) {
+    for (int i = 0; i < n; i++) {
+      arr[i] = (double)(rand())/RAND_MAX*(201) - 100; //генерация в промежутке [-100, 100]
+    }
+  } else {
+    for (int i = 0; i < n; i++) {
+      arr[i] = (rand() % 201) - 100;
+    }
   }
 }
 
-int CreateArr(double arr[]) {
+int CreateArr(double arr[], bool isReal) {
   int n = GetLength();
-  FillArr(arr, n);
+  FillArr(arr, n, isReal);
   cout << "Начальный массив:" << endl;
   Print(arr, n);
   return n;
 }
 
-double MaxElement(double arr[], int n) {
+int MaxElement(double arr[], int n) {
   double tmax = arr[0];
+  int idx = 0;
   for (int i = 0; i < n; i++) {
     if (arr[i] > tmax) {
       tmax = arr[i];
+      idx = i;
     }
   }
-  return tmax;
+  return idx;
 }
 
-double MinElement(double arr[], int n) {
+int MinElement(double arr[], int n) {
   double tmin = arr[0];
+  int idx = 0;
   for (int i = 0; i < n; i++) {
     if (arr[i] < tmin) {
       tmin = arr[i];
+      idx = i;
     }
   }
-  return tmin;
+  return idx;
 }
 
 void Task1() {
   cout << "Найти максимальный и минимальный элементы массива" << endl;
   double arr[MAX_N];
-  int n = CreateArr(arr);
-  cout << "Максимальный элемент: " << MaxElement(arr, n) << endl;
-  cout << "Минимальный элемент: " << MinElement(arr, n) << endl;
+  int n = CreateArr(arr, 1);
+  cout << "Максимальный элемент: " << arr[MaxElement(arr, n)] << endl;
+  cout << "Минимальный элемент: " << arr[MinElement(arr, n)] << endl;
+}
+
+void SwapMaxMin(double arr[], int n, int max, int min) {
+  double t = arr[max];
+  arr[max] = arr[min];
+  arr[min] = t;
 }
 
 void Task2() {
   cout << "Переставить местами максимальный и минимальный элементы" << endl;
   double arr[MAX_N];
-  int n = CreateArr(arr);  
-  
+  int n = CreateArr(arr, 1);
+  SwapMaxMin(arr, n, MaxElement(arr, n), MinElement(arr, n));
+  cout << "Переставлены местами " << arr[MaxElement(arr, n)] << " (max) и " << arr[MinElement(arr, n)] << " (min)\n";
+  Print(arr, n);
 }
 
-void Task3() {}
+int UniqueElem(double arr[], int n) {
+  double t;
+  int idx = 1;
+  for (int i = 1; i < n; i++) {
+    t = arr[i-1];
+    if (t!=arr[i]) {
+      idx++;
+    }
+  }
+  return idx;
+}
+
+void Task3() {
+  cout << "Найти количество различных элементов в массиве.\n"
+          "Вывести значения элементов и сколько раз встречается каждый из них (без повторения значений).\n";
+  double arr[MAX_N];
+  int n = CreateArr(arr, 0);
+  cout << "Кол-во различных элементов: " << UniqueElem(arr, n);
+}
+
 void Task11_1() {}
 void Task11_2() {}
