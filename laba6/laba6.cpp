@@ -152,16 +152,36 @@ void Task2() {
   Print(arr, n);
 }
 
-int UniqueElem(double arr[], int n) {
-  double t;
-  int idx = 1;
+// кол-во различных элементов
+int UniqueElemAmount(double arr[], int n) {
+  int amount = 1;
   for (int i = 1; i < n; i++) {
-    t = arr[i-1];
-    if (t!=arr[i]) {
-      idx++;
+    int j = 0;
+    for (j = 0; j < i; j++) {
+      if (arr[i] == arr[j]) break;
+    }
+    if (i == j) amount ++;
+  }
+  return amount;
+}
+
+void UniqueElemAppearance(double arr[], int n) {
+  double processed[n];
+  for (int i = 0; i < n; i++) {
+    processed[i] = 0;
+  }
+  for (int i = 0; i < n; i++) {
+    if (processed[i] == 0) {
+      int count = 0;
+      for (int j = i; j < n; j++) {
+        if (arr[j] == arr[i]) {
+          count++;
+          processed[j] = 1;
+        }
+      }
+      cout << arr[i] << "\t" << count << " раз(а)" << endl;
     }
   }
-  return idx;
 }
 
 void Task3() {
@@ -169,7 +189,8 @@ void Task3() {
           "Вывести значения элементов и сколько раз встречается каждый из них (без повторения значений).\n";
   double arr[MAX_N];
   int n = CreateArr(arr, 0);
-  cout << "Кол-во различных элементов: " << UniqueElem(arr, n);
+  cout << "Кол-во различных элементов: " << UniqueElemAmount(arr, n) << endl;
+  UniqueElemAppearance(arr, n);
 }
 
 void Task11_1() {}
