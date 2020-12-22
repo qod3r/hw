@@ -14,6 +14,7 @@ void Task2();
 void Task3();
 void Task11_1();
 void Task11_2();
+void Task11_3();
 
 int main() {
   Menu();
@@ -28,6 +29,7 @@ void Menu() {
     cout << " 3 - Задание 3" << endl;
     cout << " 4 - Вар 11-1" << endl;
     cout << " 5 - Вар 11-2" << endl;
+    cout << " 6 - Вар 11-3" << endl;
     cout << " 0 - Выйти" << endl;
     cout << " ------------- " << endl;
 
@@ -48,6 +50,9 @@ void Menu() {
         break;
       case 5:
         Task11_2();
+        break;
+      case 6:
+        Task11_3();
         break;
       case 0:
         cout << "Bye" << endl;
@@ -132,7 +137,7 @@ int MinElement(double arr[], int n) {
 void Task1() {
   cout << "Найти максимальный и минимальный элементы массива" << endl;
   double arr[MAX_N];
-  int n = CreateArr(arr, 1);
+  int n = CreateArr(arr, 0);
   cout << "Максимальный элемент: " << arr[MaxElement(arr, n)] << endl;
   cout << "Минимальный элемент: " << arr[MinElement(arr, n)] << endl;
 }
@@ -146,7 +151,7 @@ void SwapMaxMin(double arr[], int n, int max, int min) {
 void Task2() {
   cout << "Переставить местами максимальный и минимальный элементы" << endl;
   double arr[MAX_N];
-  int n = CreateArr(arr, 1);
+  int n = CreateArr(arr, 0);
   SwapMaxMin(arr, n, MaxElement(arr, n), MinElement(arr, n));
   cout << "Переставлены местами " << arr[MaxElement(arr, n)] << " (max) и " << arr[MinElement(arr, n)] << " (min)\n";
   Print(arr, n);
@@ -193,5 +198,53 @@ void Task3() {
   UniqueElemAppearance(arr, n);
 }
 
-void Task11_1() {}
-void Task11_2() {}
+double AbsMinElem(double arr[], int n) {
+  double tmin = arr[0];
+  int idx = 0;
+  for (int i = 0; i < n; i++) {
+    if (abs(arr[i]) < abs(tmin)) {
+      tmin = arr[i];
+      idx = i;
+    }
+  }
+  return idx;
+}
+
+void Task11_1() {
+  cout << "В одномерном массиве, состоящем из n вещественных элементов, вычислить:\n"
+          "номер минимального по модулю элемента массива\n";
+  double arr[MAX_N];
+  int n = CreateArr(arr, 1);
+  cout << "Номер минимального по модулю элемента: " << AbsMinElem(arr, n) + 1;
+}
+
+double AbsSum(double arr[], int n) {
+  int firstNegative = 0;
+  double sum = 0;
+  for (int i = 0; i < n; i++) {
+    if (arr[i] < 0) {
+      firstNegative = i + 1;
+      break;
+    }
+  }
+  for (int i = firstNegative; i < n; i++) {
+    sum += abs(arr[i]);
+  }
+  return sum;
+}
+
+void Task11_2() {
+  cout << "В одномерном массиве, состоящем из n вещественных элементов, вычислить:\n"
+          "сумму модулей элементов массива, расположенных после первого отрицательного элемента.\n";
+  double arr[MAX_N];
+  int n = CreateArr(arr, 1);
+  cout << "Сумма модулей: " << AbsSum(arr, n);
+}
+
+void Task11_3() {
+  cout << "Сжать массив, удалив из него все элементы, величина которых находится в интервале [а,b].\n"
+          "Освободившиеся в конце массива элементы заполнить нулями.\n";
+  double arr[MAX_N];
+  int n = CreateArr(arr, 1);
+  
+}
