@@ -246,5 +246,39 @@ void Task11_3() {
           "Освободившиеся в конце массива элементы заполнить нулями.\n";
   double arr[MAX_N];
   int n = CreateArr(arr, 1);
-  
+  double a, b;
+  cout << "Введите интервал a b: ";
+  cin >> a >> b;
+
+  if (a > b) {
+    double t = a;
+    a = b;
+    b = t;
+  }
+
+  if (a == b) {
+    for (int i = 0; i < n; i++) {
+      if (arr[i] == a) {
+        arr[i] = 0;
+      }
+    }
+  } else {
+    for (int i = 0; i < n; i++) {
+      if (arr[i] > a && arr[i] < b) {
+        arr[i] = 0;
+      }
+    }
+  }
+
+  for (int i = 0; i < n - 1; i++) {
+    for (int j = 0; j < n - i - 1; j++) {
+      if (arr[j] == 0 && arr[j + 1] != 0) {
+        int temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+      }
+    }
+  }
+
+  Print(arr, n);
 }
