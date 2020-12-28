@@ -358,7 +358,7 @@ MigrationBackup/
 .ionide/
 cw*/
 *.o
-*_set
-reverse
-asorted
-random
+*set
+*done
+*shaker
+*times
