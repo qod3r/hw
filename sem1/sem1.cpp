@@ -11,6 +11,7 @@ void Swap(int, int);
 void BubbleSort(int [], int);
 void ShakerSort(int [], int);
 void CreateDatasets();
+void ExecSort();
 
 int main() {
   Menu();
@@ -33,9 +34,9 @@ void Menu() {
       case 1:
        CreateDatasets();
        break;
-      //case 2:
-      //  task2();
-      //  break;
+      case 2:
+       ExecSort();
+       break;
       //case 3:
       //  task3();
       //  break;
@@ -112,5 +113,62 @@ void CreateDatasets() {
   for (int i = 0; i < 10000; i++) {
     out_random << (rand() % 20001) - 10000 << " ";
   }
+  //reverse set
+  for (int i = 10000; i > 0; i--) {
+    out_reverse << i << " ";
+  }
+  //asorted set
+  for (int i = 1; i <= 10000; i++) {
+    if (i % 100 == 0) {
+      out_asorted << (rand() % 10001) << " ";
+    } else {
+      out_asorted << i << " ";
+    }
+  }
+}
 
+void ExecSort() {
+  for (int i = 10; i <= 10000;) {
+    ifstream in_asorted("asorted_set");
+    ifstream in_reverse("reverse_set");
+    ifstream in_random("random_set");
+    
+    int *arr_asorted = new int[i];
+    int *arr_reverse = new int[i];
+    int *arr_random = new int[i];
+
+    for (int j = 0; j < i; j++) {
+      in_asorted >> arr_asorted[j];
+      in_reverse >> arr_reverse[j];
+      in_random >> arr_random[j];
+    }
+    cout << (i-10)/40 << " %\r"; cout.flush();
+    in_asorted.close(); in_reverse.close(); in_random.close();
+
+    BubbleSort(arr_asorted, i);
+    BubbleSort(arr_reverse, i);
+    BubbleSort(arr_random, i);
+    
+    ofstream out_asorted("asorted", ios::app);
+    ofstream out_reverse("reverse", ios::app);
+    ofstream out_random("random", ios::app);
+
+    for (int j = 0; j < i; j++) {
+      out_asorted << arr_asorted[j] << " ";
+      out_reverse << arr_reverse[j] << " ";
+      out_random << arr_random[j] << " ";
+    }
+    out_asorted << endl; out_reverse << endl; out_random << endl;
+    out_asorted.close(); out_reverse.close(); out_random.close();
+
+    delete[] arr_asorted;
+    delete[] arr_reverse;
+    delete[] arr_random;
+
+    if (10000 - i < 50 && i != 10000) {
+      i = 10000;
+    } else {
+      i += 50;
+    }
+  }
 }
