@@ -199,7 +199,7 @@ void Task3() {
 }
 
 double AbsMinElem(double arr[], int n) {
-  double tmin = arr[0];
+  double tmin = abs(arr[0]);
   int idx = 0;
   for (int i = 0; i < n; i++) {
     if (abs(arr[i]) < abs(tmin)) {
