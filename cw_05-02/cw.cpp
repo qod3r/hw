@@ -43,8 +43,8 @@ void FillArr(int *arr, int n) {
 void Reassign(int *&arr, int &n, int k) {
   if (k >= 0 && k <= n+1) {
     int *buff = new int[n+1];
-    for (int i = 0; i < n; i++) {
-      buff[i+1] = arr[i];
+    for (int i = 0; i < k; i++) {
+      buff[i] = arr[i];
     }
     buff[0] = 10;
 
