@@ -1,25 +1,40 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-#define RANDOM_RANGE (rand() % 10) + 1
+#include "qL.h"
+
+#define NUM_RANGE (double)(rand())/RAND_MAX*(201) - 100
+#define SIZE_RANGE (rand() % 10) + 4
+
 using namespace std;
 
-void CreateArr();
+double * CreateArr();
 void CreateData();
-void Menu();
+void Menu(double *);
+
+int fileLen{0};
 
 int main() {
-  Menu();
+  fstream checkfile("array_data");
+  double *arr;
+  if (checkfile.good()) {
+    arr = CreateArr();
+  } else {
+    CreateData();
+    arr = CreateArr();
+  }
+  checkfile.close();
+  Menu(arr);
 }
 
-void Menu() {
+void Menu(double *arr) {
   int menu_choice;
   do {
-    cout << endl << " ------------- " << endl;
+    cout << "Текущий массив: ";
+    qL::Print(arr, fileLen);
+    cout << " ------------- " << endl;
     cout << " 1 - Создать файл" << endl;
-    cout << " 2 - ранд" << endl;
-    // cout << " 3 - Отсортировать шейкером" << endl;
-    // cout << " 4 - Задание 4" << endl;
+    cout << " 2 - Прочесть файл" << endl;
     cout << " 0 - Выйти" << endl;
     cout << " ------------- " << endl;
 
@@ -27,17 +42,11 @@ void Menu() {
 
     switch(menu_choice) {
       case 1:
-       CreateData();
-       break;
-      // case 2:
-      //  qrand();
-      //  break;
-      // case 3:
-      //  ExecShakerSort();
-      //  break;
-      //case 4:
-      //  task4();
-      //  break;
+        CreateData();
+        break;
+      case 2:
+        CreateArr();
+        break;
       case 0:
         cout << "Bye" << endl;
         break;
@@ -47,27 +56,39 @@ void Menu() {
     }
     if (menu_choice != 0) {
       cout << endl << "Нажмите Enter чтобы продолжить...";
-      cin.get();    
-      cin.get();    
-    }               
+      cin.get();
+      cin.get();
+    }
   } while(menu_choice);
 }
 
 void CreateData() {
-  ofstream data("array_data");
+  ofstream data_out("array_data");
   srand(time(0));
 
-  int elems = RANDOM_RANGE;
+  int elems = SIZE_RANGE;
   for (int i = 0; i < elems; i++) {
-    data << RANDOM_RANGE << " ";
+    data_out << NUM_RANGE << " ";
   }
-  data.close();
+  data_out.close();
+  cout << "Файл создан" << endl;
 }
 
-void CreateArr() {
-  ifstream data("array_data");
-  
+double * CreateArr() {
+  ifstream len("array_data");
+  double temp;
+  fileLen = 0;
+  while (len >> temp) {
+    fileLen++;
+  }
+  double *arr = new double[fileLen];
+  len.close();
 
-  int *arr = new int[];
-  data.close();
+  ifstream data_in("array_data");
+  for (int i = 0; i < fileLen; i++) {
+    data_in >> arr[i];
+  }
+  data_in.close();
+
+  return arr;
 }
