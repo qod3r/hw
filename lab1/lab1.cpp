@@ -14,9 +14,9 @@ void Menu(double *);
 void Addition();
 void Deletion();
 void Reallocate(double *&, double, int, bool);
-void AddElem(double *);
-void RemoveElem(double *);
-void LookFor(double *, double, double, bool);
+void AddElem(double *&);
+void RemoveElem(double *&);
+void LookFor(double *&, double, double, bool);
 
 int fileLen{0};
 
@@ -125,7 +125,7 @@ void Reallocate(double *&arr, double n, int k, bool isAdd) {
       if (k == 0) break;
       buff[i] = arr[i];
     }
-    for (int i = k; i <= fileLen; i++) {
+    for (int i = k; i < fileLen; i++) {
       buff[i] = arr[i+1];
     }
     delete[] arr;
@@ -135,7 +135,7 @@ void Reallocate(double *&arr, double n, int k, bool isAdd) {
   }
 }
 
-void AddElem(double *arr) {
+void AddElem(double *&arr) {
   int menu_choice;
   do {
     cout << "Текущий массив: ";
@@ -187,7 +187,7 @@ void AddElem(double *arr) {
   } while(menu_choice);
 }
 
-void RemoveElem(double *arr) {
+void RemoveElem(double *&arr) {
   int menu_choice;
   do {
     cout << "Текущий массив: ";
@@ -235,12 +235,12 @@ void RemoveElem(double *arr) {
   } while(menu_choice);  
 }
 
-void LookFor(double *arr, double n, double lookVal, bool isAdd) {
+void LookFor(double *&arr, double n, double lookVal, bool isAdd) {
   if (isAdd) {
     bool valFound = false;
-    for (int i = 0; i <= fileLen; i++) {
+    for (int i = 0; i < fileLen; i++) {
       if (arr[i] == lookVal) {
-        Reallocate(arr, n, i, true);
+        Reallocate(arr, n, i+1, true);
         valFound = true;
         break;
       }
@@ -249,7 +249,7 @@ void LookFor(double *arr, double n, double lookVal, bool isAdd) {
   } 
   else if (!isAdd) {
     bool valFound = false;
-    for (int i = 0; i <= fileLen; i++) {
+    for (int i = 0; i < fileLen; i++) {
       if (arr[i] == lookVal) {
         Reallocate(arr, n, i, false);
         valFound = true;
