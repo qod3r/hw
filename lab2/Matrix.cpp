@@ -29,6 +29,9 @@ void Vector::Print() {
     std::cout << "\b\b" << "]" << std::endl;
 }
 
+
+
+
 Matrix::Matrix(int n, int m) {  //выделение памяти на матрицу при создании экземпляра
     _n = n;
     _m = m;
@@ -60,12 +63,10 @@ void Matrix::Randomize(int a, int b, bool isReal) {
     }
 }
 
-void Matrix::Print(bool isReal) {
-    int width;
-    (isReal) ? width = 11 : width = 5;
+void Matrix::Print() {
     for (int i = 0; i < _n; i++) {
         for (int j = 0; j < _m; j++) {
-            std::cout << std::setw(width) << Matr[i][j];
+            std::cout << std::setw(11) << Matr[i][j];
         }
         std::cout << std::endl;
     }
@@ -95,6 +96,14 @@ void Matrix::GetFile(const char *name) {
         }
     }
     f.close();
+}
+
+void Matrix::CopyMatrix(Matrix &orig) {
+    for (int i = 0; i < _n; i++) {
+        for (int j = 0; j < _m; j++) {
+            Matr[i][j] = orig.Matr[i][j];
+        }
+    }
 }
 
 void Matrix::UpperTriangle() {
@@ -128,3 +137,4 @@ double Matrix::Determinant() {
     }
     return det;
 }
+

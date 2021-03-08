@@ -22,11 +22,12 @@ public:
     ~Matrix();
     void Randomize(int, int, bool);
     void Input();
-    void Print(bool);
+    void Print();
     void GetFile(const char *);
     void UpperTriangle();
     void Solution(Vector &);
     double Determinant();
+    void CopyMatrix(Matrix &);
 };
 
 #endif
