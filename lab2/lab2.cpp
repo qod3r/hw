@@ -27,6 +27,7 @@ int main () {
     M.Solution(x);
     M.Print(isReal);
     x.Print();
+    cout << M.Determinant() << endl;
     return 0;
 }
 

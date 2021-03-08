@@ -120,3 +120,11 @@ void Matrix::Solution(Vector &x) {
         x.Set(i, (double)(res/Matr[i][i]));
     }
 }
+
+double Matrix::Determinant() {
+    double det = 1;
+    for (int i = 0; i < _n; i++) {
+        det *= Matr[i][i];
+    }
+    return det;
+}

@@ -26,6 +26,7 @@ public:
     void GetFile(const char *);
     void UpperTriangle();
     void Solution(Vector &);
+    double Determinant();
 };
 
 #endif
