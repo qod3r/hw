@@ -30,7 +30,8 @@ public:
     void GetFile(const char *);
     void UpperTriangle();
     void Inverse(Vector &, Matrix &Inversed);
-    void VerifySLAU(Matrix &);
+    void VerifyInverse(Matrix &);
+    double EpsCheck(Vector &);
     void Solution(Vector &);
     double Determinant();
     void CopyMatrix(Matrix &);

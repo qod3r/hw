@@ -1,4 +1,4 @@
-//выбор элемента, проверка обратной, дельта, убрать меню
+//выбор элемента, дельта
 #include <iostream>
 #include <fstream>
 #include "Matrix.h"

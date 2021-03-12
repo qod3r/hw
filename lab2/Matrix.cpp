@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>
+#include <cmath>
 #include "Matrix.h"
 
 Vector::Vector(int n) {
@@ -161,26 +162,51 @@ void Matrix::UpperTriangle() {
 
 void Matrix::Inverse(Vector &x, Matrix &Inversed) {
     for (int i = 0; i < _n; i++) {
-        Matrix C(_n, _m);
-        C.CopyMatrix(*this);
+        Matrix buff(_n, _m);
+        buff.CopyMatrix(*this);
         for (int j = 0; j < _n; j++) {
-            (i == j) ? C.Matr[j][_m - 1] = 1 : C.Matr[j][_m - 1] = 0;
+            (i == j) ? buff.Matr[j][_m - 1] = 1 : buff.Matr[j][_m - 1] = 0;
         }
-        C.UpperTriangle();
-        C.Solution(x);
+        buff.UpperTriangle();
+        buff.Solution(x);
         for (int j = 0; j < _n; j++) {
             Inversed.Matr[j][i] = x.Get(j);
         }
     }
 }
 
-void Matrix::VerifySLAU(Matrix &Inversed) {
+void Matrix::VerifyInverse(Matrix &Inversed) {
+    long double S;
+    Matrix buff(_n, _n);
     for (int i = 0; i < _n; i++) {
-        for (int j = 0; j < Inversed._m; j++) {
-            //bruh
+        for (int j = 0; j < _n; j++) {
+            S = 0;
+            for (int k = 0; k < _m-1; k++) {
+                S += Matr[i][k] * Inversed.Matr[k][j];
+            }
+            if (S < 0.000001) {
+                buff.Matr[i][j] = 0;
+            } else {
+                buff.Matr[i][j] = S;
+            }
         }
- 
     }
+    std::cout << "Проверка:\n";
+    buff.Print();
+}
+
+double Matrix::EpsCheck(Vector &x) {
+    double epsilon = 0;
+    double s;
+    for (int i = 0; i < _n; i++) {
+        s = 0;
+        for (int k = 0; k < _m-1; k++) {
+            s += Matr[i][k] * x.Get(k);
+        }
+        if (fabs(Matr[i][_m-1] - s) > epsilon)
+            epsilon = fabs(Matr[i][_m-1] - s);
+    }
+    return epsilon;
 }
 
 void Matrix::Solution(Vector &x) {
