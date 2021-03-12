@@ -73,6 +73,40 @@ void Matrix::Print() {
     std::cout << std::endl;
 }
 
+void Matrix::One() {
+    for (int i = 0; i < _n; i++) {
+        Matr[i][i] = 1;
+    }
+}
+
+void Matrix::SwapRows(int k) {
+    for (int i = k+1; i < _n; i++) {
+        if (Matr[i][k] != 0) {
+            for(int j = 0; j < _m; j++) {
+                double t = Matr[k][j];
+                Matr[k][j] = Matr[i][j];
+                Matr[i][j] = t;
+            }
+        }
+    }
+}
+
+void Matrix::Nullify() {
+    for (int i = 0; i < _n; i++) {
+        for (int j = 0; j < _m; j++) {
+            Matr[i][j] = 0;
+        }
+    }
+}
+
+void Matrix::Hilbert() {
+    for (int i = 0; i < _n; i++) {
+        for (int j = 0; j < _m; j++) {
+            Matr[i][j] = double(1./(i+j+1));
+        }
+    }
+}
+
 void Matrix::Input() {
     std::cout << "Введите матрицу " << _n << "х" << _m << " :" << std::endl;
     for (int i = 0; i < _n; i++) {
@@ -107,7 +141,14 @@ void Matrix::CopyMatrix(Matrix &orig) {
 }
 
 void Matrix::UpperTriangle() {
+    for (int i = 0; i < _n; i++) {
+        if (Matr[i][i] == 0) {
+            SwapRows(i);
+        }
+    }
+    
     double c;
+
     for (int k = 0; k < _n; k++) {
         for (int i = k+1; i < _n; i++) {
             c = (double)(-1 * Matr[i][k]/Matr[k][k]);
@@ -115,6 +156,30 @@ void Matrix::UpperTriangle() {
                 Matr[i][j] += Matr[k][j] * c;
             }
         }
+    }
+}
+
+void Matrix::Inverse(Vector &x, Matrix &Inversed) {
+    for (int i = 0; i < _n; i++) {
+        Matrix C(_n, _m);
+        C.CopyMatrix(*this);
+        for (int j = 0; j < _n; j++) {
+            (i == j) ? C.Matr[j][_m - 1] = 1 : C.Matr[j][_m - 1] = 0;
+        }
+        C.UpperTriangle();
+        C.Solution(x);
+        for (int j = 0; j < _n; j++) {
+            Inversed.Matr[j][i] = x.Get(j);
+        }
+    }
+}
+
+void Matrix::VerifySLAU(Matrix &Inversed) {
+    for (int i = 0; i < _n; i++) {
+        for (int j = 0; j < Inversed._m; j++) {
+            //bruh
+        }
+ 
     }
 }
 

@@ -1,20 +1,20 @@
+//выбор элемента, проверка обратной, дельта, убрать меню
 #include <iostream>
 #include <fstream>
 #include "Matrix.h"
 using namespace std;
 
-void FileWork();
+void ChooseTask();
 
 int main() {
-
-    Matrix M();
-    // ChooseTask();
+    ChooseTask();
     return 0;
 }
 
-Matrix ChooseMatrix() {
+void ChooseMatrix(Matrix &M) {
     int menu_choice;
-    int n, m;
+    int n, m, a, b;
+    bool isReal=1;
     char filename[50];
     cout << endl << " ------Выбор матрицы------ " << endl;
     cout << " 1 - Из файла" << endl;
@@ -27,10 +27,6 @@ Matrix ChooseMatrix() {
 
     cin >> menu_choice;
 
-    cout << "Введите размерность матрицы n m: ";
-    cin >> n >> m;
-    Matrix M(n, m);
-
     switch (menu_choice) {
         case 1:
             cout << "Введите название файла: ";
@@ -38,36 +34,42 @@ Matrix ChooseMatrix() {
             M.GetFile(filename);
             break;
         case 2:
-            
+            M.Input();
             break;
         case 3:
+            cout << "Введите диапазон значений: ";
+            cin >> a >> b;
+            cout << "Введите типа числа (0 - целые, 1 - действительные): ";
+            cin >> isReal;
+            M.Randomize(a, b, isReal);
             break;
         case 4:
+            M.One();
             break;
         case 5:
+            M.Hilbert();
             break;
         case 0:
-            cout << "Bye" << endl;
             break;
         default:
             cout << "Что-то пошло не так, попробуйте снова" << endl;
             break;
     }
-    if (menu_choice != 0) {
-        cout << endl << "Нажмите Enter чтобы продолжить...";
-        cin.get();
-        cin.get();
-    }
-    return M;
 }
 
 void ChooseTask() {
-    int menu_choice;
+    int menu_choice, n = 3, m = 3;
+    cout << "Введите размер матрицы: ";
+    cin >> n >> m;
+    Matrix M(n, m);
+    Matrix Inversed(n, m);
+    Vector x(n);
     do {
         cout << " ------Выбор действия------ " << endl;
         cout << " 1 - Решение СЛАУ" << endl;
         cout << " 2 - Определитель" << endl;
         cout << " 3 - Обратная матрица" << endl;
+        cout << " 4 - Вывести матрицу" << endl;
         cout << " 0 - Выйти" << endl;
         cout << " -------------------------- " << endl;
 
@@ -75,20 +77,33 @@ void ChooseTask() {
 
         switch (menu_choice) {
             case 1:
-                Matrix M = ChooseMatrix();
+                ChooseMatrix(M);
+                M.Print();
                 M.UpperTriangle();
                 M.Solution(x);
                 cout << "После преобразований: " << endl;
                 M.Print();
                 cout << "Ответ: ";
                 x.Print();
+                M.Nullify();
                 break;
             case 2:
-                Matrix M = ChooseMatrix();
+                ChooseMatrix(M);
+                M.Print();
                 M.UpperTriangle();
                 cout << "Определитель = " << M.Determinant() << endl;
+                M.Nullify();
                 break;
             case 3:
+                ChooseMatrix(M);
+                M.Print();
+                M.Inverse(x, Inversed);
+                Inversed.Print();
+                break;
+            case 4:
+                ChooseMatrix(M);
+                M.Print();
+                M.Nullify();
                 break;
             case 0:
                 cout << "Bye" << endl;
